@@ -24,7 +24,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-  <title>DiffRoom: Diffusion-based High-Quality 3D Room Reconstruction and Generation with Occupancy Prior</title>
+  <title>DiffInDScene</title>
   <!-- <link rel="icon" type="image/x-icon" href="static/images/favicon.ico"> -->
   <!-- <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet"> -->
@@ -52,19 +52,19 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">DiffRoom: Diffusion-based High-Quality 3D Room Reconstruction and Generation with Occupancy Prior</h1>
+            <h1 class="title is-1 publication-title">DiffInDScene: Diffusion-based High-Quality 3D Indoor Scene Generation</h1>
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
               <span class="author-block">
-                <a  target="_blank">Xiaoliang Ju</a><sup>1,2 *</sup>,</span>
+                <a  target="_blank">Xiaoliang Ju</a><sup>1 *</sup>,</span>
                 <span class="author-block">
                   <a href="https://drinkingcoder.github.io/" target="_blank">Zhaoyang Huang</a><sup>1 *</sup>,</span>
                   <span class="author-block">
-                    <a  target="_blank">Yijin Li</a><sup>3</sup>,</span>
+                    <a  target="_blank">Yijin Li</a><sup>2</sup>,</span>
                     <span class="author-block">
-                      <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank">Guofeng Zhang</a><sup>3</sup>,</span>
+                      <a href="http://www.cad.zju.edu.cn/home/gfzhang/" target="_blank">Guofeng Zhang</a><sup>2</sup>,</span>
                       <span class="author-block">
-                        <a  target="_blank">Yu Qiao</a><sup>2</sup>,</span>
+                        <a  target="_blank">Yu Qiao</a><sup>3</sup>,</span>
                         <span class="author-block">
                     <a href="https://www.ee.cuhk.edu.hk/~hsli/" target="_blank">Hongsheng Li</a><sup>1</sup>
                   </span>
@@ -72,8 +72,8 @@
 
                   <div class="is-size-5 publication-authors">
                     <sup>1</sup><span class="author-block">MMLab, The Chinese University of Hong Kong<br></span>,
-                    <sup>2</sup><span class="author-block">Shanghai AI Laboratory<br></span>,
-                    <sup>3</sup><span class="author-block">Zhejiang University<br></span>
+                    <sup>2</sup><span class="author-block">Zhejiang University<br></span>,
+                    <sup>3</sup><span class="author-block">Shanghai AI Laboratory<br></span>
 
                     <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span>
                   </div>
@@ -82,7 +82,7 @@
                     <div class="publication-links">
                          <!-- Arxiv PDF link -->
                       <span class="link-block">
-                        <a href="static/pdfs/DiffRoom_paper.pdf" target="_blank"
+                        <a href="static/pdfs/diffindscene.pdf" target="_blank"
                         class="external-link button is-normal is-rounded is-dark">
                         <span class="icon">
                           <i class="fas fa-file-pdf"></i>
@@ -93,7 +93,7 @@
 
                     <!-- Supplementary PDF link -->
                     <span class="link-block">
-                      <a href="static/pdfs/DiffRoom_supp_compressed.pdf" target="_blank"
+                      <a href="static/pdfs/diffindscene_sup.pdf" target="_blank"
                       class="external-link button is-normal is-rounded is-dark">
                       <span class="icon">
                         <i class="fas fa-file-pdf"></i>
@@ -137,16 +137,28 @@
     <div class="hero-body">
       <video poster="" id="tree" autoplay controls muted loop height="100%">
         <!-- Your video here -->
-        <source src="static/videos/DiffRoom_demo_replica.mov"
+        <source src="static/videos/diffscene - HD 720p.mov"
         type="video/mp4">
       </video>
       <h2 class="subtitle">
-        Demo video on Appartment-0 in Replica dataset. The room model is generated based on a rough occupancy prior, please see the Supplementary for details.
+        Demo.
       </h2>
     </div>
   </div>
 </section>
 <!-- End teaser video -->
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <img src="static/images/teaser.png" alt="MY ALT TEXT"/>
+      <h2 class="subtitle">
+        Coarse-to-fine indoor scene geometry generation using a sparse diffusion framework. For better visualization, the texture is produced by <a href="https://ybbbbt.com/publication/dreamspace/">DreamSpace</a>
+         after the scene geometry is generated by our DiffInDScene.
+      </h2>
+    </div>
+  </div>
+</section>
 
 
 <!-- Paper abstract -->
@@ -155,19 +167,15 @@
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <h2 class="title is-3">Abstract</h2>
-        <img src="static/images/teaser.png" alt="MY ALT TEXT"/>
-        <h2 style="text-align: left;">
-          Experiment on ScanNet dataset. Our DiffRoom enables 3D high-quality room reconstruction with a rough occupancy prior.
-        </h2>
         <hr>
         <div class="content has-text-justified">
           <p>
-            We present DiffRoom, a novel framework for tackling the problem of high-quality 3D indoor room reconstruction and generation, both of which are challenging due to the complexity and diversity of the room geometry.
-            Although diffusion-based generative models have previously demonstrated impressive performance in image generation and object-level 3D generation, they have not yet been applied to room-level 3D generation due to their computationally intensive costs.
-            In DiffRoom, we propose a sparse 3D diffusion network that is efficient and possesses strong generative performance for Truncated Signed Distance Field (TSDF), based on a rough occupancy prior. 
-            Inspired by KinectFusion's incremental alignment and fusion of local SDFs, we propose a diffusion-based TSDF fusion approach that iteratively diffuses and fuses TSDFs, facilitating the reconstruction and generation of an entire room environment.
-            Additionally, to ease training, we introduce a curriculum diffusion learning paradigm that speeds up the training convergence process and enables high-quality reconstruction. 
-            According to the user study, the mesh quality generated by our DiffRoom can even outperform the ground truth mesh provided by ScanNet.           </p>
+            We present DiffInDScene, a novel framework for tackling the problem of high-quality 3D indoor scene generation, which is challenging due to the complexity and diversity of the indoor scene geometry.
+Although diffusion-based generative models have previously demonstrated impressive performance in image generation and object-level 3D generation, they have not yet been applied to room-level 3D generation due to their computationally intensive costs.
+In DiffInDScene, we propose a cascaded 3D diffusion pipeline that is efficient and possesses strong generative performance for Truncated Signed Distance Function (TSDF).  The whole pipeline is designed to run on a sparse occupancy space in a coarse-to-fine fashion.
+Inspired by KinectFusion's incremental alignment and fusion of local TSDF volumes, we propose a diffusion-based SDF fusion approach that iteratively diffuses and fuses local TSDF volumes, facilitating the generation of an entire room environment. The generated results demonstrate that our work is capable to achieve high-quality room generation directly in three-dimensional space, starting from scratch.
+In addition to the scene generation, the final part of DiffInDScene can be used as a post-processing module to refine the 3D reconstruction results from multi-view stereo.
+According to the user study, the mesh quality generated by our DiffInDScene can even outperform the ground truth mesh provided by ScanNet.           </p>
         </div>
       </div>
     </div>
