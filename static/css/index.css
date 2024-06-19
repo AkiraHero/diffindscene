@@ -133,5 +133,33 @@ body {
   font-size: smaller;
 }
 
+.video-container {
+  display: flex;
+}
 
+.video-wrapper {
+  flex: 1;
+  margin-right: 10px; 
+}
+
+.video-wrapper:last-child {
+  margin-right: 0; 
+}
+
+
+.subtitle2 {
+  text-align: center; 
+}
+.subtitle1 {
+}
+
+.center {
+  text-align: center;
+}
+
+.red {
+  color: red;
+  font-weight: bold;
+  font-size: 24px; 
+}
 

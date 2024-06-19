@@ -3,4 +3,4 @@ This is the github page project of DiffIndScene. Please view: https://akirahero.
 
 
 # Code
-Coming soon...
+We are doing the final cleanup of the code and will release it **<span style="color:red">by the end of June</span>**.
