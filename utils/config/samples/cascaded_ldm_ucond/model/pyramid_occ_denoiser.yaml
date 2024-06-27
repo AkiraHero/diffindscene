@@ -1,0 +1,103 @@
+name: MSLDM
+paras:
+  unet_model: "sparse"
+
+  use_ema: True
+  restoration_method: "general"
+  multi_restore_batch_size: 16
+  method: 'generative'
+  ##############
+  # first second third
+  level: 'first'
+  ##############
+  add_noise_da: true
+  classifier_free_guidance: true
+  use_text_condition: false
+
+  # noise schedule
+  noise_schedule:
+    first:
+      num_train_timesteps: 1000
+      clip_sample: false
+      # cos straight arccos scaled_linear
+      beta_schedule: "cos"
+    second:
+      num_train_timesteps: 1000
+      clip_sample: false
+      # cos straight arccos scaled_linear
+      beta_schedule: "cos"
+    third:
+      num_train_timesteps: 1000
+      clip_sample: True
+      # cos straight arccos scaled_linear
+      beta_schedule: "cos"
+      clip_sample_range: 3.0
+
+      
+  # latent encoding
+  first_stage_model:
+    model_class: MSTSDFPVQGANNew
+    config_file: model/tsdf_vqgan_retrain.yaml
+
+    ckpt: "model_ckpt-epoth844-globalstep399056-2023-10-21-20-19-53.pt"
+############################################################################
+  # diffusion network
+  unet_model:
+    first: 
+    # consider: /home/xlju/pro/diffs/output/2023-11-08-05-41-51-m_attd_finetune/model_paras_log/model_ckpt-epoth449-globalstep284176val_ema-2023-11-09-00-43-31.pt
+      # ckpt: "/home/xlju/pro/diffs/output/2023-10-13-18-02-21-sparse1st_resume_lr2/model_paras_log/model_ckpt-epoth495-globalstep531062-2023-10-14-09-30-32.pt"
+      ckpt: "model_ckpt-epoth494-globalstep171826val_ema-2023-10-27-07-04-32.pt"
+      model_type: UNetModel
+      model_args:
+        dims: 3
+        is_sparse: True
+        in_channels: 4
+        out_channels: 4
+        model_channels: 64
+        attention_resolutions: []
+        num_res_blocks: 2
+        channel_mult:
+        - 1
+        - 2
+        - 4
+        num_head_channels: 32
+        use_spatial_transformer: True
+        transformer_depth: 1
+        context_dim: 256
+        use_position_encoding: False
+    second: 
+      ckpt: "model_ckpt-epoth494-globalstep368775val_ema-2023-10-27-09-39-59.pt"
+      model_type: UNetModel
+      model_args:
+        dims: 3
+        is_sparse: True
+        in_channels: 8 # with condition
+        out_channels: 4
+        model_channels: 64
+        use_spatial_transformer: False
+        attention_resolutions: []
+        num_res_blocks: 2
+        channel_mult:
+        - 1
+        - 2
+        - 4
+        - 8
+        num_head_channels: 32
+    third: 
+      ckpt: "model_ckpt-epoth104-globalstep156450val_ema-2023-10-27-15-35-58.pt"
+      model_type: UNetModel
+      model_args:
+        dims: 3
+        is_sparse: True
+        in_channels: 9
+        out_channels: 1
+        model_channels: 64
+        use_spatial_transformer: False
+        attention_resolutions: []
+        num_res_blocks: 2
+        channel_mult:
+        - 1
+        - 2
+        - 4
+        - 8
+        num_head_channels: 32

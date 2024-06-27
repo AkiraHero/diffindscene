@@ -1,0 +1,35 @@
+dataset:
+  config_file: dataset/ali3dfront.yaml
+  dataset_class: Ali3DFront
+logging:
+  ckpt_eph_interval: 20
+  path: ../output
+  suffix: '1st-ema'
+model:
+  config_file: model/pyramid_occ_denoiser.yaml
+  model_class: MSLDM
+training:
+  device: 'cuda:0'
+  epoch: 5000
+  optimizer:
+  - name: opt
+    paras:
+      lr: 0.0001
+    type: Adam
+  trainer_class: CascadedLDMTrainer
+
+  # just to save params
+  enable_val: true
+  val_interval: 20
+
+
+testing:
+  device: 'cuda:0'
+  mode: "uncond"
+  seed: 63266
+  trainer_class: CascadedLDMTrainer
+  save_mesh: true
+  test_log_dir: "output/uncond"
+  operating_size: [32, 32, 16]
+  level_seq: ['first', 'second', 'third']
+

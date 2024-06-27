@@ -1,0 +1,29 @@
+dataset:
+  config_file: dataset/ali3dfront.yaml
+  dataset_class: Ali3DFront
+logging:
+  ckpt_eph_interval: 2
+  path: ../output
+  suffix: 'msvqgan'
+model:
+  config_file: model/tsdf_vqgan.yaml
+  model_class: MSTSDFPVQGANNew
+training:
+  device: 'cuda:0'
+  epoch: 500
+  optimizer:
+    paras:
+      lr: 0.00001
+    type: Adam
+  trainer_class: TSDFPVQGANTrainer
+  enable_val: false
+  val_interval: 10
+  log_ckpt_interval: 2
+
+
+testing:
+  device: 'cuda:0'
+  trainer_class: TSDFPVQGANTrainer
+  save_mesh: false
+  output_dir: "tst_release"
+  ckpt: ""

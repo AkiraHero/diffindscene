@@ -1,0 +1,42 @@
+name: MSTSDFPVQGANNew
+paras:
+    embed_dim: 4
+    n_embed: 8192
+    ddconfig1:
+      double_z: False
+      z_channels: 4
+      resolution: 512
+      in_channels: 1
+      out_ch: 1
+      ch: 32
+      ch_mult: [1,2,4]  # num_down = len(ch_mult)-1
+      num_res_blocks: 2
+      attn_resolutions: []
+      dropout: 0.
+    ddconfig2:
+      use_bev: False
+      double_z: False
+      z_channels: 4
+      resolution: 512
+      in_channels: 4
+      out_ch: 4
+      ch: 256
+      ch_mult: [1,1]  # num_down = len(ch_mult)-1
+      num_res_blocks: 2
+      attn_resolutions: []
+      dropout: 0.
+
+    temperature_scheduler_config:
+      warm_up_steps: 0
+      max_decay_steps: 1000001
+      lr_start: 0.9
+      lr_max: 0.9
+      lr_min: 1.0e-06
+    lossconfig:
+      params:
+        disc_conditional: False
+        disc_in_channels: 1
+        disc_start: 6000
+        disc_weight: 0.2
+        codebook_weight: 1.0
+        rec_loss: 'l1'

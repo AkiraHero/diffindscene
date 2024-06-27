@@ -1,0 +1,40 @@
+dataset_class: Ali3DFront
+paras:
+  mode: 'train'
+  num_workers: 0
+  shuffle: false
+  version: 'v2'
+  # data_root: '/home/xlju/3dfront'
+  data_root: '/home/xlju/front3d_ini/new_npz'
+
+####################
+## useful config - vary with training level
+
+  batch_size: 1
+
+  # first level
+  level_config:
+    first:
+      load_content: ['latent', 'tsdf', 'sketch']
+      transform: ['simpletrans']
+    second:
+      load_content: ['latent']
+      transform: ['simpletrans']
+    third:
+      load_content: ['tsdf','latent']
+      transform: ['simpletrans', 'simplecrop']
+
+  voxel_dim: [128, 128, 128] # only effect in third level
+  batch_collate_func: 'batch_collate_latent_code'
+
+  latent_dir: '/home/xlju/pro/diffs/script/data_latent_new_dataset'
+  # modify latent_scale according to latents 
+  latent_scale: [0.0290, 0.1550]
+  data_split_file:
+    train: train_512_512_128.txt
+    val: val.txt
+    test: test.txt
+
+
+
+
