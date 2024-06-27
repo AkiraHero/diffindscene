@@ -1,0 +1,20 @@
+dataset_class: Ali3DFront
+paras:
+  version: 'v2'
+  batch_size: 1
+  mode: 'train'
+  num_workers: 4
+  shuffle: true
+  data_root: '/home/xlju/front3d_ini/new_npz'
+  data_split_file:
+    train: train_512_512_128.txt
+    test: train_512_512_128.txt
+  voxel_dim: [96, 96, 96]
+
+  # for training
+  transform: ['randomcrop']
+
+  # for test
+  # transform: []
+  # batch_collate_func: 'batch_collate_fn_for_lat'
+

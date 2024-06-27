@@ -1,0 +1,31 @@
+dataset:
+  config_file: dataset/ali3dfront.yaml
+  dataset_class: Ali3DFront
+logging:
+  ckpt_eph_interval: 20
+  path: ../output
+  suffix: 'none'
+model:
+  config_file: model/sketch_vae.yaml
+  model_class: SketchVAE
+training:
+  device: 'cuda:0'
+  epoch: 5000
+  optimizer:
+  - name: opt
+    paras:
+      lr: 0.00001
+    type: Adam
+  trainer_class: SKetchVAETrainer
+
+  # just to save params
+  enable_val: false
+  val_interval: 20
+
+
+testing:
+  device: 'cuda:0'
+  trainer_class: SKetchVAETrainer
+  test_log_dir: "/home/xlju/tst"
+
+
