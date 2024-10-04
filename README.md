@@ -1,3 +1,9 @@
+
+# Updates
+[2024-10-05] Checkpoints added.
+
+[2024-10-05] More concrete instructions added.
+
 # Overview
 This is the official implementation of our  paper: 
 
@@ -20,10 +26,6 @@ This repo provides or will provide
   - [x] checkpoint
   - [ ] extension to other dataset
 
-# Updates
-[2024-10-05] Checkpoints added.
-
-[2024-10-05] More concrete instructions added.
 
 
 # Dependency 
